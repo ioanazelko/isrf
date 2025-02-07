@@ -1,0 +1,32 @@
+{
+  "template": "https://github.com/OpenAstronomy/packaging-guide",
+  "commit": "3d3b97fdd6e94ba84abdf7af55b638e56f606130",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "package_name": "isrf",
+      "module_name": "isrf",
+      "short_description": "Calculating the galactic isrf in 3D",
+      "author_name": "Ioana A. Zelko",
+      "author_email": "ioana.zelko@gmail.com",
+      "project_url": "isrf_3D",
+      "license": "GNU GPL v3+",
+      "minimum_python_version": "3.9",
+      "use_compiled_extensions": "n",
+      "enable_dynamic_dev_versions": "y",
+      "include_example_code": "y",
+      "include_cruft_update_github_workflow": "y",
+      "_sphinx_theme": "alabaster",
+      "_parent_project": "",
+      "_install_requires": "",
+      "_copy_without_render": [
+        "docs/_templates",
+        "docs/_static",
+        ".github/workflows/sub_package_update.yml"
+      ],
+      "_template": "https://github.com/OpenAstronomy/packaging-guide",
+      "_commit": "3d3b97fdd6e94ba84abdf7af55b638e56f606130"
+    }
+  },
+  "directory": null
+}
