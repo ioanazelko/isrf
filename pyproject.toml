@@ -38,6 +38,7 @@ zip-safe = false
 include-package-data = true
 
 [tool.setuptools.packages.find]
+include = ["isrf*"]
 exclude = ["isrf._dev*"]
 
 [tool.setuptools_scm]
