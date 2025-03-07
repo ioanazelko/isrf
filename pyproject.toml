@@ -14,7 +14,7 @@ license = { file = "licenses/LICENSE.rst" }
 authors = [
   { name = "Ioana A. Zelko", email = "ioana.zelko@gmail.com" },
 ]
-dependencies = []
+dependencies = ["astropy","matplotlib","healpy"]
 dynamic = ["version"]
 
 [project.scripts]
