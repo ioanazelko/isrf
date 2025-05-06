@@ -12,6 +12,5 @@ def galactic_to_cartesian(l, b, r):
     x = r * np.cos(b) * np.cos(l)
     y = r * np.cos(b) * np.sin(l)
     z = r * np.sin(b)
-    return x, y, z
-
+    return np.array([ x, y, z])
 
