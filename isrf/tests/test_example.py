@@ -1,4 +1,5 @@
 from numpy.testing import assert_allclose
+import numpy as np
 from isrf.utils import galactic_to_cartesian
 from isrf.example_mod import primes
 import isrf.circle as circle
