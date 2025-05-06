@@ -13,8 +13,6 @@ def test_coordinates():
     assert_allclose( coords, np.array([1.0, 0.0, 0.0]), rtol=1e-7, atol=1e-7)
 
 
-
-
 def test_circle_implementation():
 
     """ This needs to be added some comparison statements"""
