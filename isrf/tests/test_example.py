@@ -1,7 +1,7 @@
 from numpy.testing import assert_allclose
 from isrf.utils import galactic_to_cartesian
 from isrf.example_mod import primes
-
+import isrf.circle as circle
 
 def test_primes():
     assert primes(10) == [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
