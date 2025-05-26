@@ -131,8 +131,7 @@ def add_fullsky_healpix_centers(ax, nside, color = 'r'):
     ax.scatter(x_c, y_c, z_c, c=color, s=3)  
 
 
-
-def add_healpix_centers(ax, pixel_index_array, nside, radius =1, nest=False, color = 'r'):
+def add_healpix_centers(ax, pixel_index_array, nside, radius =1, nest=False, color = 'r',alpha=1, s= 3):
     """
     Add HEALPix pixel centers to the given 3D plot for the given nside
     ax: 3D plot axis
@@ -149,7 +148,7 @@ def add_healpix_centers(ax, pixel_index_array, nside, radius =1, nest=False, col
     x_c, y_c, z_c = utils.galactic_to_cartesian( l_c,b_c, radius)
 
     # Scatter plot for point visualization
-    ax.scatter(x_c, y_c, z_c, c=color, s=3) 
+    ax.scatter(x_c, y_c, z_c, c=color, s=s, alpha=alpha) 
 
 
 def add_scatter_points_array(ax, points, color='r', s=1 ):
@@ -253,7 +252,7 @@ def plot_test_arch():
     plt.show()
 
 
-def add_healpix_arches_optimized(ax, pixel_index_array, nside, nest=False, radius = 1, color='orchid', npoints=10, s=5):
+def add_healpix_arches(ax, pixel_index_array, nside, nest=False, radius = 1, color='orchid', npoints=10, s=5, alpha=0.5):
     """
     Add the arches for the boundaries of a set of HEALPix pixels to a 3D plot.
     Note - this doubles the arches, as the sides are double counted
@@ -279,4 +278,30 @@ def add_healpix_arches_optimized(ax, pixel_index_array, nside, nest=False, radiu
     arch_samples = circle.parameterize_arch(p1_array, p2_array,npoints=npoints)
 
     arch_samples = arch_samples.reshape(-1, 3)
-    ax.scatter(arch_samples[:,0],arch_samples[:,1],arch_samples[:,2], color=color, s=s)
+    ax.scatter(arch_samples[:,0],arch_samples[:,1],arch_samples[:,2], color=color, s=s, alpha=alpha)
+
+
+
+def add_healpixels(ax, nside=8, pixel_index_array="all", nest=False, centers=True, npoints=20, radius=1, color="orchid", alpha=0.5, s=1): 
+    """ 
+    Add HEALPix pixels to a 3D plot.
+    ax: Matplotlib axis object
+    pixel_index_array: Array of HEALPix pixel indices, or "all" to include all pixels
+    npoints: Number of points to use for the pixel boundaries
+    radius: Radius of the HEALPix pixels in the plot
+    color: Color of the HEALPix pixel boundaries
+    alpha: Transparency of the HEALPix pixel boundaries
+    s: Size of the pixel centers if they are plotted
+    nside: HEALPix nside parameter
+    nest: True for NESTED pixel ordering, False for RING pixel ordering
+    centers: True to plot pixel centers, False to leave them out
+    """
+    if pixel_index_array == "all":
+        pixel_index_array = np.arange(hp.nside2npix(nside))
+    
+    # Add the HEALPix pixel arch boundaries
+
+    add_healpix_arches(ax, pixel_index_array=pixel_index_array, nside=nside, nest=nest, npoints=npoints, radius=radius, color=color, alpha=alpha,s =s)
+    if centers == True:
+        # Add the HEALPix pixel centers
+        add_healpix_centers(ax, pixel_index_array=pixel_index_array, nside=nside, nest=nest,s=s,alpha=alpha, radius=radius)
