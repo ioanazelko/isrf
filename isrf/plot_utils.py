@@ -3,8 +3,9 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 
-import isrf.circle
-import isrf.utils
+import isrf.circle as circle
+import isrf.utils as utils
+import isrf.ray as ray
 
 def get_example_points(center = np.array([1,0,0])):
     # Example galactic coordinates (longitude, latitude, radius)
@@ -131,7 +132,7 @@ def add_fullsky_healpix_centers(ax, nside, color = 'r'):
 
 
 
-def add_healpix_centers(ax, pixel_index_array, nside,nest=False, color = 'r'):
+def add_healpix_centers(ax, pixel_index_array, nside, radius =1, nest=False, color = 'r'):
     """
     Add HEALPix pixel centers to the given 3D plot for the given nside
     ax: 3D plot axis
@@ -145,7 +146,7 @@ def add_healpix_centers(ax, pixel_index_array, nside,nest=False, color = 'r'):
     l_c, b_c = hp.pix2ang(nside, pixel_index_array, lonlat=True, nest=nest)
 
     # Convert Galactic coordinates to Cartesian coordinates for 3D plotting
-    x_c, y_c, z_c = utils.galactic_to_cartesian( l_c,b_c, 1)
+    x_c, y_c, z_c = utils.galactic_to_cartesian( l_c,b_c, radius)
 
     # Scatter plot for point visualization
     ax.scatter(x_c, y_c, z_c, c=color, s=3) 
@@ -186,7 +187,7 @@ def add_healpix_boundaries(ax, pixel_index_array, nside,nest=False, color = 'b' 
 
 
 
-def add_healpixels(ax, pixel_index_array, nside,nest=False, centers=True):
+def add_healpixels_linear_boundaries_and_centers(ax, pixel_index_array, nside,nest=False, centers=True):
     """ 
     Add HEALPix pixels to a 3D plot.
     ax: Matplotlib axis object
