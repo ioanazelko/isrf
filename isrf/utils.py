@@ -20,8 +20,6 @@ def galactic_to_cartesian(l, b, r):
     return np.array([ x, y, z])
 
 
-
-
 def cartesian_to_galactic(x, y, z):
     """
     Convert Cartesian coordinates (x, y, z) to Galactic coordinates (l, b, distance).

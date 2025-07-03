@@ -7,19 +7,33 @@ import isrf.circle as circle
 import isrf.utils as utils
 import isrf.ray as ray
 
-def get_example_points(center = np.array([1,0,0])):
-    # Example galactic coordinates (longitude, latitude, radius)
-    coordinates = [
-        (-77.016, -12.033, 1),   # Center of the galaxy
-        (110.43, -7.78, 1) # Some point in space
-    ]
 
-    # Convert to Cartesian coordinates for plotting
-    points = np.array([utils.galactic_to_cartesian(*coord) for coord in coordinates])
-    p1 = points[0]+center
-    p2 = points[1]+center
 
-    return p1,p2, center
+
+def add_stars(ax, star_positions, s=50, color = 'gold', alpha=0.8):
+    """
+    Add stars to a 3D plot.
+
+    Parameters:
+    - ax: matplotlib 3D axis object.
+    - star_positions: array-like, shape (n_stars, 3), cartesian coordinates of the stars.
+    """
+ 
+    stars_to_plot = np.asanyarray(star_positions)
+    # Plot stars
+    ax.scatter(stars_to_plot[:,0], stars_to_plot[:,1], stars_to_plot[:, 2], color=color, s=s, label='Stars', marker='*', alpha=alpha)
+
+
+
+def add_scatter_points_array(ax, points, color='r', s=1 , label=None, alpha=1):
+    """ 
+    Adds scatter points to the 3D plot
+    points : array of shape (n,3)
+    color : str, default 'r'
+    s : float, default 1
+    """
+    ax.scatter(points[0], points[1], points[2], color=color, s= s, label=label, alpha=alpha)
+
 
 
 def get_verticies_pairs(pixel_index_array, radius, nside, nest):
@@ -93,7 +107,6 @@ def add_xyz_labels(ax, unit = "[kpc]"):
     ax.set_zlabel('Z '+unit)
 
 
-
 def add_ray(ax, origin, destination, color = 'blue'):
     """
     Add a ray to the plot
@@ -151,16 +164,6 @@ def add_healpix_centers(ax, pixel_index_array, nside, radius =1, nest=False, col
     ax.scatter(x_c, y_c, z_c, c=color, s=s, alpha=alpha) 
 
 
-def add_scatter_points_array(ax, points, color='r', s=1 ):
-    """ 
-    Adds scatter points to the 3D plot
-    points : array of shape (n,3)
-    color : str, default 'r'
-    s : float, default 1
-    """
-    ax.scatter(points[0], points[1], points[2], color=color, s= s)
-
-
 
 def add_healpix_boundaries(ax, pixel_index_array, nside,nest=False, color = 'b' ):
     """
@@ -204,7 +207,6 @@ def add_healpixels_linear_boundaries_and_centers(ax, pixel_index_array, nside,ne
 
 
 ######## Functions for plotting the arches of the HEALPix pixels ########
-
 
 
 def plot_test_circle():
